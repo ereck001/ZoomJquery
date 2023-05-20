@@ -1,0 +1,45 @@
+*{
+    margin:0%;
+    padding: 0;
+}
+#zoom-container{
+    width: fit-content;
+    display: flex;
+}
+#zoom-section{
+    width: 245px;
+}
+#main-image{
+    width: 230px;
+    height: 350px;
+    background-image: url("../images/smallimage.jpg");
+    background-size:contain;
+    border:solid 5px #aaa;
+    border-radius: 2px;
+    cursor: none;
+    overflow:hidden;    
+}
+#zoom-lens{
+    width: 115px;
+    height: 175px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border:solid 5px #555;
+    border-radius: 2px;          
+}
+.zoom-minis{    
+    width: 300px;
+    padding:5px
+}
+.zoom-gallery{
+    border:solid 1px #aaa;
+}
+.zoom-gallery:hover{
+    border:solid 1px #000000;
+}
+#img-zoomed{
+    margin: 5px;
+    width: 230px;
+    height: 350px;    
+    border-radius: 2px;
+    background-repeat: no-repeat;      
+}

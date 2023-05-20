@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ptBR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <title>teste Zoom</title>
+</head>
+
+<body>
+    <div id="zoom-container">
+        <section id="zoom-section">
+            <div id="main-image" onmouseover="ShowZoom()" onmouseout="HideZoom()" onmousemove="seekCursor(event)">
+                <div hidden id="zoom-lens"></div>
+            </div>
+            <figure class="zoom-minis">
+                <div>
+                    <img class='zoom-gallery' onclick="ChangeMainPic('../images/smallimage.jpg')"
+                        src="images/tinyimage.jpg" />
+
+                    <img class='zoom-gallery' onclick="ChangeMainPic('../images/smallimage-1.jpg')"
+                        src="images/tinyimage-1.jpg" />
+
+                    <img class='zoom-gallery' onclick="ChangeMainPic('../images/smallimage-2.jpg')"
+                        src="images/tinyimage-2.jpg" />
+
+                    <img class='zoom-gallery' onclick="ChangeMainPic('../images/smallimage-3.jpg')"
+                    src="images/tinyimage-3.jpg" />
+                </div>
+            </figure>
+        </section>
+        <figure hidden id="img-zoomed"></figure>
+    </div>
+    <script>       
+        function seekCursor(event) {
+
+            let zoomLens = $('#zoom-lens');
+            let mouseX = event.pageX - $('#main-image').offset().left;
+            let mouseY = event.pageY - $('#main-image').offset().top;
+            let scrollPositionX = event.pageX / 230 * 100
+            let scrollPositionY = event.pageY / 350 * 100
+
+            zoomLens.css({
+                'margin-left': `${mouseX - 60}px`, 
+                'margin-top': `${mouseY - 90}px` 
+            });
+             $('#img-zoomed').css('background-position-x',`${-scrollPositionX*4.6 + 120}px`)//calcular o canto da lente
+             $('#img-zoomed').css('background-position-y',`${-scrollPositionY*7 + 190}px`)
+        }
+
+        function ChangeMainPic(mainImage) {
+            $('#main-image').css('background-image', `url("${mainImage}")`);
+        }
+        function ShowZoom() {
+            $('#zoom-lens').attr('hidden', false)
+            let image = $('#main-image').css('background-image')
+            let initialIndex = image.indexOf('image')
+
+            image = image.substring(26, image.length)
+                .replace('/i', '"../i')
+                .replace(')', '')
+                .replace('small', 'big')
+            
+            $('#img-zoomed').attr('hidden', false)
+            $('#img-zoomed').css('background-image', `url(${image})`)
+
+        }
+        function HideZoom() {
+            $('#zoom-lens').attr('hidden', true)
+            $('#img-zoomed').attr('hidden', true)
+        }
+    </script>
+</body>
+
+</html>
